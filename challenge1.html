@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .game-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            padding: 10px;
+            width: 60%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .reset-btn {
+            background-color: #f44336;
+        }
+        .reset-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h2>Guess the Number</h2>
+        <p>Guess a number between 1 and 100</p>
+        <input type="number" id="userGuess" placeholder="Enter a number" min="1" max="100">
+        <button onclick="checkGuess()">Submit Guess</button>
+        <p class="result" id="result"></p>
+        <button class="reset-btn" onclick="resetGame()">Start New Game</button>
+    </div>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const userGuess = document.getElementById("userGuess").value;
+            const resultElement = document.getElementById("result");
+
+            if (!userGuess) {
+                resultElement.textContent = "Please enter a number!";
+                resultElement.style.color = "red";
+                return;
+            }
+
+            attempts++;
+
+            if (userGuess == randomNumber) {
+                resultElement.textContent = `Congratulations! You guessed it right in ${attempts} attempts.`;
+                resultElement.style.color = "green";
+            } else if (userGuess < randomNumber) {
+                resultElement.textContent = "Too low! Try again.";
+                resultElement.style.color = "orange";
+            } else {
+                resultElement.textContent = "Too high! Try again.";
+                resultElement.style.color = "orange";
+            }
+        }
+
+        function resetGame() {
+            randomNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            document.getElementById("userGuess").value = "";
+            document.getElementById("result").textContent = "";
+        }
+    </script>
+</body>
+</html>
