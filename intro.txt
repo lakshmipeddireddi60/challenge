@@ -1,0 +1,1 @@
+This web appliaction is about a number guessing game. Which creates an interactive environment to play with numbers.
